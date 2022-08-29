@@ -1,0 +1,22 @@
+.list__item:hover {
+    outline: 1px solid green;
+    transition: .3s ease-in-out;
+}
+
+.list__item {
+    /* background-color: black;
+    color: wheat; */
+}
+
+body {
+    /* background-color: black; */
+}
+
+.nav {
+    margin-top: 50px;
+}
+
+.form__input {
+    /* color: wheat;
+    background-color: black; */
+}
