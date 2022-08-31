@@ -29,7 +29,6 @@
     form.append(input);
     form.append(buttonWrapper);
 
-    // проверяем, если у нас есть что-то в input, то разблокируем кнопку
     input.addEventListener('input', function () {
       if (input.value !== "") {
         button.disabled = false
@@ -69,14 +68,12 @@
     deleteButton.classList.add('btn', 'btn-danger');
     deleteButton.textContent = 'Удалить';
 
-    // меняем статус объекта
     if (obj.done == true) item.classList.add('list-group-item-success');
 
     doneButton.addEventListener('click', function () {
       item.classList.toggle('list-group-item-success')
-      // Получаем первое текстовое значение у объекта (в нашем случае имя)
+      // Получаем первое текстовое значение у объекта
 
-      // Проходим по массиву, ищем такое же имя как у объекта и сравниваем статус done
       for (const listItem of listArray) {
         if (listItem.id == obj.id) listItem.done = !listItem.done
       }
@@ -94,12 +91,10 @@
       }
     })
 
-    // Вкладываем кновки в див
     buttonGroup.append(doneButton);
     buttonGroup.append(deleteButton);
     item.append(buttonGroup);
 
-    // Доступ приложению к элементу и кнопкам, чтобы обрабатывать события нажатия
     return {
       item,
       doneButton,
@@ -107,7 +102,7 @@
     }
   }
 
-  // Задаем каждому новому делу уникальный идентификатор
+  // Идентифкатор для нового дела
   function getNewId(arr) {
     let max = 0;
     for (const item of arr) {
@@ -117,7 +112,7 @@
   }
 
   function saveList(arr, keyName) {
-    // Преобразовываем массив в строчку, потому-что локал стрэдж не может хранить массивы
+    // Преобразовываем массив в строчку
     localStorage.setItem(keyName, JSON.stringify(arr));
   }
 
@@ -126,7 +121,6 @@
     let todoItemForm = createTodoItemForm();
     let todoList = createTodoList();
 
-    // Чтобы кейнейм был для глобального доступа
     listName = keyName;
     listArray = def;
 
@@ -143,10 +137,7 @@
       todoList.append(todoItem.item);
     }
 
-    // submit чтобы можно было отправлять фотрму нажатием на Enter
     todoItemForm.form.addEventListener('submit', function (e) {
-
-      // чтобы страница не обновлялась при отправке формы
       e.preventDefault();
 
       if (!todoItemForm.input.value) {
@@ -167,7 +158,7 @@
 
       todoList.append(todoItem.item);
 
-      // после того как ввели дело, кнопка становится недоступна
+      // после ввода дела, кнопка становится недоступна
       todoItemForm.button.disabled = true;
 
       todoItemForm.input.value = '';
